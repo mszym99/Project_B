@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 #secrets
-secrets.py
+secrets_1.py
 
 # Distribution / packaging
 .Python
