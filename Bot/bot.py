@@ -3,7 +3,8 @@ import valo_api
 import requests
 from nextcord.ext import commands
 from valo_api import *
-import secretstuff
+import secrets_1 as secrets
+from secrets import *
 
 mainEndpoint = 'https://valorant-api.com/v1/'
 
@@ -55,4 +56,4 @@ async def Agent(ctx, agent_name):
 
 
 
-bot.run(secretstuff.token_bot())
+bot.run(secrets.token_bot())
