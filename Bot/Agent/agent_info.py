@@ -40,7 +40,18 @@ async def Agent(ctx, agent_name):
     
     abilities = response['data']['abilities']
     description = response['data']['description']
-
-    abilities_info = "\n".join([f"{ability['displayName']}: {ability['description']}" for ability in abilities])
-
+    #abilityIcons = await getAgentAbilityIcons(ctx, agent_name)
+    #abilities_info = "\n".join([f"{ability['displayName']}\n{ability['description']}\n{abilityIcons[i]}" for i, ability in enumerate(abilities)])
+    abilities_info = "\n".join([f"{ability['displayName']}\n{ability['description']}" for i, ability in enumerate(abilities)])
     await ctx.send(f"**{agent_name}**\n{description}\n\n**Abilities**\n{abilities_info}\n\n")
+
+async def getAgentAbilityIcons(ctx, agent_name):
+    agent_uuid = await getAgentUuid(ctx, agent_name)
+    if agent_uuid == None:
+        return
+    else:
+        endpoint = f'https://valorant-api.com/v1/agents/{agent_uuid}'
+        response = requests.get(endpoint).json()
+        abilities = response['data']['abilities']
+        ability_icons = [ability['displayIcon'] for ability in abilities]
+        return ability_icons
